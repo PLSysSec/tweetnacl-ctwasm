@@ -7,7 +7,7 @@
 ;; input pointer $k: 32 bytes
 ;; alloc pointer $alloc: 152 bytes
 ;; return: 0 okay, -1 problem
-(func $crypto_secretbox_open (export "crypto_secretbox_open") 
+(func $crypto_secretbox_open (export "crypto_secretbox_open") trusted
 	(param $m i32)
 	(param $c i32)
 	(param $d i32)
@@ -35,6 +35,7 @@
 			(get_local $x)
 			(get_local $alloc)
 			(call $crypto_onetimeauth_verify)
+			(i32.declassify)
 			(i32.const 0)
 
 			(if (i32.eq)
@@ -47,10 +48,10 @@
 					(get_local $alloc)
 					(call $crypto_stream_xor)
 
-					(i64.store offset=0 (get_local $m) (i64.const 0))
-					(i64.store offset=8 (get_local $m) (i64.const 0))
-					(i64.store offset=16 (get_local $m) (i64.const 0))
-					(i64.store offset=24 (get_local $m) (i64.const 0))
+					(s64.store offset=0 (get_local $m) (s64.const 0))
+					(s64.store offset=8 (get_local $m) (s64.const 0))
+					(s64.store offset=16 (get_local $m) (s64.const 0))
+					(s64.store offset=24 (get_local $m) (s64.const 0))
 					(i32.const 0)
 					return
 				)

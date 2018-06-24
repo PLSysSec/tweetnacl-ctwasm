@@ -33,7 +33,7 @@
 	(call $pack25519)
 
 	
-	(i32.store8 offset=31 (get_local $r) (i32.xor (i32.load8_u offset=31 (get_local $r))
-		(i32.shl (call $par25519 (get_local $alloc) (get_local $ty)) (i32.const 7))
+	(s32.store8 offset=31 (get_local $r) (s32.xor (s32.load8_u offset=31 (get_local $r))
+		(s32.shl (call $par25519 (get_local $alloc) (get_local $ty)) (s32.const 7))
 	))
 )

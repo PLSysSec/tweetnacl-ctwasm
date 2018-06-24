@@ -10,7 +10,7 @@
 	(param $s i32)
 	(param $alloc i32)
 
-	(local $b i32) (local $i i32)
+	(local $b s32) (local $i i32)
 
 	(get_local $p)
 	(get_global $gf0)
@@ -31,10 +31,10 @@
 	(set_local $i (i32.const 255))
 	(block
 		(loop
-			(set_local $b (i32.and (i32.shr_u
-				(i32.load8_u (i32.add (get_local $s) (i32.shr_u (get_local $i) (i32.const 3))))
-				(i32.and (get_local $i) (i32.const 7))
-			) (i32.const 1)))
+			(set_local $b (s32.and (s32.shr_u
+				(s32.load8_u (i32.add (get_local $s) (i32.shr_u (get_local $i) (i32.const 3))))
+				(s32.and (s32.classify (get_local $i)) (s32.const 7))
+			) (s32.const 1)))
 
 			(get_local $p)
 			(get_local $q)

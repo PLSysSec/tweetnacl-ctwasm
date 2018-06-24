@@ -5,7 +5,7 @@
 ;; input value $bytes
 ;; input pointer $key: 32 bytes
 ;; alloc pointer $alloc: 80 bytes
-(func $crypto_onetimeauth (export "crypto_onetimeauth")
+(func $crypto_onetimeauth (export "crypto_onetimeauth") trusted
 	(param $mac i32)
 	(param $m i32)
 	(param $bytes i32)
@@ -32,13 +32,13 @@
 ;; input pointer $key: 32 bytes
 ;; alloc pointer $alloc: 96 bytes
 ;; return bool
-(func $crypto_onetimeauth_verify (export "crypto_onetimeauth_verify")
+(func $crypto_onetimeauth_verify (export "crypto_onetimeauth_verify") trusted
 	(param $h i32)
 	(param $m i32)
 	(param $bytes i32)
 	(param $key i32)
 	(param $alloc i32)
-	(result i32)
+	(result s32)
 	
 	(i32.add (get_local $alloc) (i32.const 80))
 	(get_local $m)

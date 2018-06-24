@@ -6,7 +6,7 @@
 (func $cswap (export "cswap")
 	(param $p i32)
 	(param $q i32)
-	(param $b i32)
+	(param $b s32)
 
 	(get_local $p)
 	(get_local $q)

@@ -8,7 +8,7 @@
 	(param $a i32)
 	(param $b i32)
 	(param $alloc i32)
-	(result i32)
+	(result s32)
 
 	(get_local $alloc)
 	(get_local $a)

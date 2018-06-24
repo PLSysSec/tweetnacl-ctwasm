@@ -7,7 +7,7 @@
 ;; input pointer $key: 32 bytes
 ;; alloc pointer $alloc: 120 bytes
 ;; return: pointer to output: $d - 16 bytes; will point to $c area
-(func $nacl_secretbox (export "nacl_secretbox")
+(func $nacl_secretbox (export "nacl_secretbox") trusted
 	(param $c i32)
 	(param $m i32)
 	(param $d i32)
@@ -16,10 +16,10 @@
 	(param $alloc i32)
 	(result i32)
 
-	(i64.store offset=0 (get_local $m) (i64.const 0))
-	(i64.store offset=8 (get_local $m) (i64.const 0))
-	(i64.store offset=16 (get_local $m) (i64.const 0))
-	(i64.store offset=24 (get_local $m) (i64.const 0))
+	(s64.store offset=0 (get_local $m) (s64.const 0))
+	(s64.store offset=8 (get_local $m) (s64.const 0))
+	(s64.store offset=16 (get_local $m) (s64.const 0))
+	(s64.store offset=24 (get_local $m) (s64.const 0))
 	
 	(get_local $c)
 	(get_local $m)
@@ -41,7 +41,7 @@
 ;; input pointer $key: 32 bytes
 ;; alloc pointer $alloc: 152 bytes
 ;; return: pointer to output: $d - 32 bytes (if -1, then problem occured); will point to $d area
-(func $nacl_secretbox_open (export "nacl_secretbox_open")
+(func $nacl_secretbox_open (export "nacl_secretbox_open") trusted
 	(param $m i32)
 	(param $box i32)
 	(param $d i32)
@@ -50,8 +50,8 @@
 	(param $alloc i32)
 	(result i32)
 
-	(i64.store offset=0 (get_local $box) (i64.const 0))
-	(i64.store offset=8 (get_local $box) (i64.const 0))
+	(s64.store offset=0 (get_local $box) (s64.const 0))
+	(s64.store offset=8 (get_local $box) (s64.const 0))
 	
 	(get_local $m)
 	(get_local $box)

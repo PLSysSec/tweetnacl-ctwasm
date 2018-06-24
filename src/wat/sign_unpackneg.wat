@@ -4,7 +4,7 @@
 ;; input pointer $p: 32 bytes
 ;; alloc pointer $alloc: 7 * 128 = 896 bytes
 ;; return bool
-(func $unpackneg (export "unpackneg")
+(func $unpackneg (export "unpackneg") trusted
 	(param $r i32)
 	(param $p i32)
 	(param $alloc i32)
@@ -113,7 +113,7 @@
 	(get_local $den)
 	(call $M)
 
-	(if (call $neq25519 (get_local $chk) (get_local $num) (get_local $den2))
+	(if (i32.declassify (call $neq25519 (get_local $chk) (get_local $num) (get_local $den2)))
 		(then
 			(get_local $r)
 			(get_local $r)
@@ -132,17 +132,17 @@
 	(get_local $den)
 	(call $M)
 
-	(if (call $neq25519 (get_local $chk) (get_local $num) (get_local $den2))
+	(if (i32.declassify (call $neq25519 (get_local $chk) (get_local $num) (get_local $den2)))
 		(then
 			(i32.const -1)
 			(return)
 		)
 	)
 
-	(if (i32.eq
-			(call $par25519 (get_local $r) (get_local $den2))
-			(i32.shr_u (i32.load8_u offset=31 (get_local $p)) (i32.const 7))
-		)
+	(if (i32.declassify (s32.eq
+                        (call $par25519 (get_local $r) (get_local $den2))
+                        (s32.shr_u (s32.load8_u offset=31 (get_local $p)) (s32.const 7))
+                        ))
 		(then
 			(get_local $r)
 			(get_global $gf0)

@@ -25,7 +25,7 @@
 	(get_global $sigma)
 	(call $core_hsalsa20) ;; core_hsalsa20
 
-	(i64.store (get_local $sn) (i64.load offset=16 (get_local $n)))
+	(s64.store (get_local $sn) (s64.load offset=16 (get_local $n)))
 
 	(get_local $c)
 	(get_local $m)

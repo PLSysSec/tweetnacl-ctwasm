@@ -31,23 +31,23 @@
 	(get_local $alloc)
 	(call $crypto_hash)
 
-	(i32.store8 offset=0 (get_local $d) (i32.and
-		(i32.load8_u offset=0 (get_local $d))
-		(i32.const 248)
+	(s32.store8 offset=0 (get_local $d) (s32.and
+		(s32.load8_u offset=0 (get_local $d))
+		(s32.const 248)
 	))
-	(i32.store8 offset=31 (get_local $d) (i32.and
-		(i32.load8_u offset=31 (get_local $d))
-		(i32.const 127)
+	(s32.store8 offset=31 (get_local $d) (s32.and
+		(s32.load8_u offset=31 (get_local $d))
+		(s32.const 127)
 	))
-	(i32.store8 offset=31 (get_local $d) (i32.or
-		(i32.load8_u offset=31 (get_local $d))
-		(i32.const 64)
+	(s32.store8 offset=31 (get_local $d) (s32.or
+		(s32.load8_u offset=31 (get_local $d))
+		(s32.const 64)
 	))
 
-	(i64.store offset=32 (get_local $sm) (i64.load offset=32 (get_local $d)))
-	(i64.store offset=40 (get_local $sm) (i64.load offset=40 (get_local $d)))
-	(i64.store offset=48 (get_local $sm) (i64.load offset=48 (get_local $d)))
-	(i64.store offset=56 (get_local $sm) (i64.load offset=56 (get_local $d)))
+	(s64.store offset=32 (get_local $sm) (s64.load offset=32 (get_local $d)))
+	(s64.store offset=40 (get_local $sm) (s64.load offset=40 (get_local $d)))
+	(s64.store offset=48 (get_local $sm) (s64.load offset=48 (get_local $d)))
+	(s64.store offset=56 (get_local $sm) (s64.load offset=56 (get_local $d)))
 
 	(get_local $r)
 	(i32.add (get_local $sm) (i32.const 32))
@@ -69,10 +69,10 @@
 	(get_local $alloc)
 	(call $pack)
 
-	(i64.store offset=32 (get_local $sm) (i64.load offset=32 (get_local $sk)))
-	(i64.store offset=40 (get_local $sm) (i64.load offset=40 (get_local $sk)))
-	(i64.store offset=48 (get_local $sm) (i64.load offset=48 (get_local $sk)))
-	(i64.store offset=56 (get_local $sm) (i64.load offset=56 (get_local $sk)))
+	(s64.store offset=32 (get_local $sm) (s64.load offset=32 (get_local $sk)))
+	(s64.store offset=40 (get_local $sm) (s64.load offset=40 (get_local $sk)))
+	(s64.store offset=48 (get_local $sm) (s64.load offset=48 (get_local $sk)))
+	(s64.store offset=56 (get_local $sm) (s64.load offset=56 (get_local $sk)))
 
 	(get_local $h)
 	(get_local $sm)
@@ -88,8 +88,8 @@
 		(loop
 			(br_if 1 (i32.eq (get_local $i) (i32.const 32)))
 
-			(i64.store (i32.add (get_local $x) (i32.shl (get_local $i) (i32.const 3)))
-				(i64.load8_u (i32.add (get_local $r) (get_local $i)))
+			(s64.store (i32.add (get_local $x) (i32.shl (get_local $i) (i32.const 3)))
+				(s64.load8_u (i32.add (get_local $r) (get_local $i)))
 			)
 			
 			(set_local $i (i32.add (get_local $i) (i32.const 1)))
@@ -101,8 +101,8 @@
 		(loop
 			(br_if 1 (i32.eq (get_local $i) (i32.const 64)))
 
-			(i64.store (i32.add (get_local $x) (i32.shl (get_local $i) (i32.const 3)))
-				(i64.const 0)
+			(s64.store (i32.add (get_local $x) (i32.shl (get_local $i) (i32.const 3)))
+				(s64.const 0)
 			)
 			
 			(set_local $i (i32.add (get_local $i) (i32.const 1)))
@@ -121,11 +121,11 @@
 				(loop
 					(br_if 1 (i32.eq (get_local $j) (i32.const 32)))
 
-					(i64.store (get_local $tmp) (i64.add
-						(i64.load (get_local $tmp))
-						(i64.mul
-							(i64.load8_u (i32.add (get_local $h) (get_local $i)))
-							(i64.load8_u (i32.add (get_local $d) (get_local $j)))
+					(s64.store (get_local $tmp) (s64.add
+						(s64.load (get_local $tmp))
+						(s64.mul
+							(s64.load8_u (i32.add (get_local $h) (get_local $i)))
+							(s64.load8_u (i32.add (get_local $d) (get_local $j)))
 						)
 					))
 

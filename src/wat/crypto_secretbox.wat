@@ -7,7 +7,7 @@
 ;; input pointer $k: 32 bytes
 ;; alloc pointer $alloc: 120 bytes
 ;; return: 0 okay, -1 if $d < 32
-(func $crypto_secretbox (export "crypto_secretbox")
+(func $crypto_secretbox (export "crypto_secretbox") trusted
 	(param $c i32)
 	(param $m i32)
 	(param $d i32)
@@ -33,8 +33,8 @@
 			(get_local $alloc)
 			(call $crypto_onetimeauth)
 
-			(i64.store offset=0 (get_local $c) (i64.const 0))
-			(i64.store offset=8 (get_local $c) (i64.const 0))
+			(s64.store offset=0 (get_local $c) (s64.const 0))
+			(s64.store offset=8 (get_local $c) (s64.const 0))
 			(i32.const 0)
 			return
 		)
