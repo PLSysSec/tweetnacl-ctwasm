@@ -3,15 +3,17 @@
 ;; polyobject
 ;;  pad: 0..15
 ;;  r: 16..35
-;;  leftover: 36..39 (public)
+;;  leftover: 36..39 (unused)
 ;;  h: 40..59 
 ;;  final: 60..63
 ;;  buffer: 64..79
 
 ;; pointer $poly: 80 bytes (polyobject)
+;; input value $leftover
 ;; output pointer $mac: 16 bytes
 (func $poly1305_finish (export "poly1305_finish") trusted
 	(param $poly i32)
+	(param $leftover i32)
 	(param $mac i32)
 
 	(local $h0 s32) (local $h1 s32) (local $h2 s32) (local $h3 s32) (local $h4 s32) (local $c s32)
@@ -20,9 +22,9 @@
 	(local $mask s32)
 	(local $i i32) (local $tmp i32)
 
-	(if (i32.gt_u (i32.declassify (s32.load offset=36 (get_local $poly))) (i32.const 0))
+	(if (i32.gt_u (get_local $leftover) (i32.const 0))
 		(then
-			(set_local $i (i32.add (i32.const 1) (i32.declassify (s32.load offset=36 (get_local $poly)))))
+			(set_local $i (i32.add (i32.const 1) (get_local $leftover)))
 			(set_local $tmp (i32.add (get_local $poly) (get_local $i)))
 			(s32.store8 offset=63 (get_local $tmp) (s32.const 1))
 			(block $break

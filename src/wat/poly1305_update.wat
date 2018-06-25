@@ -3,27 +3,31 @@
 ;; polyobject
 ;;  pad: 0..15
 ;;  r: 16..35
-;;  leftover: 36..39 (public)
+;;  leftover: 36..39 (unused)
 ;;  h: 40..59 
 ;;  final: 60..63
 ;;  buffer: 64..79
 
 ;; pointer $poly: 80 bytes (polyobject)
+;; input value $leftover
 ;; input pointer $m: $bytes bytes
 ;; input value $bytes
+;; result value: new leftover
 (func $poly1305_update (export "poly1305_update") trusted
 	(param $poly i32)
+	(param $leftover i32)
 	(param $m i32)
 	(param $bytes i32)
+	(result i32)
 
 	(local $i i32)
 	(local $want i32)
 	(local $tmp1 i32)
 	(local $tmp2 i32)
 
-	(if (i32.ne (i32.declassify (s32.load offset=36 (get_local $poly))) (i32.const 0))
+	(if (i32.ne (get_local $leftover) (i32.const 0))
 		(then
-			(set_local $want (i32.sub (i32.const 16) (i32.declassify (s32.load offset=36 (get_local $poly)))))
+			(set_local $want (i32.sub (i32.const 16) (get_local $leftover)))
 	
 			(if (i32.gt_u (get_local $want) (get_local $bytes))
 				(then
@@ -31,7 +35,7 @@
 				)
 			)
 
-			(set_local $tmp1 (i32.add (get_local $poly) (i32.declassify (s32.load offset=36 (get_local $poly)))))
+			(set_local $tmp1 (i32.add (get_local $poly) (get_local $leftover)))
 			(set_local $tmp2 (get_local $m))
 			(block $break1
 				(loop $top1
@@ -49,11 +53,11 @@
 
 			(set_local $bytes (i32.sub (get_local $bytes) (get_local $want)))
 			(set_local $m (i32.add (get_local $m) (get_local $want)))
-			(s32.store offset=36 (get_local $poly) (s32.add (s32.classify (get_local $want)) (s32.load offset=36 (get_local $poly))))
+			(set_local $leftover (i32.add (get_local $want) (get_local $leftover)))
 
-			(if (i32.lt_u (i32.declassify (s32.load offset=36 (get_local $poly))) (i32.const 16))
+			(if (i32.lt_u (get_local $leftover) (i32.const 16))
 				(then
-					return
+					(return (get_local $leftover))
 				)
 			)
 
@@ -62,7 +66,7 @@
 			(i32.const 16)
 			(call $poly1305_blocks) ;; poly1305_blocks
 
-			(s32.store offset=36 (get_local $poly) (s32.const 0))
+			(set_local $leftover (i32.const 0))
 		)
 	)
 
@@ -83,7 +87,7 @@
 	(if (i32.gt_u (get_local $bytes) (i32.const 0))
 		(then
 			(set_local $i (i32.const 0))
-			(set_local $tmp1 (i32.add (get_local $poly) (i32.declassify (s32.load offset=36 (get_local $poly)))))
+			(set_local $tmp1 (i32.add (get_local $poly) (get_local $leftover)))
 			(set_local $tmp2 (get_local $m))
 			(block $break2
 				(loop $top2
@@ -99,7 +103,8 @@
 				)
 			)
 
-			(s32.store offset=36 (get_local $poly) (s32.add (s32.load offset=36 (get_local $poly)) (s32.classify (get_local $bytes))))
+			(set_local $leftover (i32.add (get_local $leftover) (get_local $bytes)))
 		)
 	)
+	(get_local $leftover)
 )

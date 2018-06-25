@@ -11,17 +11,23 @@
 	(param $bytes i32)
 	(param $key i32)
 	(param $alloc i32)
-	
+
+	(local $leftover i32)
+	(set_local $leftover (i32.const 0))
+
 	(get_local $alloc)
 	(get_local $key)
 	(call $poly1305_init) ;; poly1305_init
 
 	(get_local $alloc)
+	(get_local $leftover)
 	(get_local $m)
 	(get_local $bytes)
 	(call $poly1305_update) ;; poly1305_update
+	(set_local $leftover)
 
 	(get_local $alloc)
+	(get_local $leftover)
 	(get_local $mac)
 	(call $poly1305_finish) ;; poly1305_finish
 )

@@ -3,7 +3,7 @@
 ;; polyobject
 ;;  pad: 0..15
 ;;  r: 16..35
-;;  leftover: 36..39 (public)
+;;  leftover: 36..39 (unused)
 ;;  h: 40..59 
 ;;  final: 60..63
 ;;  buffer: 64..79
