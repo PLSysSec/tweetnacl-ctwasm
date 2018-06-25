@@ -7,7 +7,7 @@
 ;; input pointer $key: 32 bytes
 ;; alloc pointer $alloc: 120 bytes
 ;; return: pointer to output: $d - 16 bytes; will point to $c area
-(func $nacl_secretbox (export "nacl_secretbox") trusted
+(func $nacl_secretbox (export "nacl_secretbox")
 	(param $c i32)
 	(param $m i32)
 	(param $d i32)
