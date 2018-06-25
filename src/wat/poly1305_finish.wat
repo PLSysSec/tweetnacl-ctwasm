@@ -11,7 +11,7 @@
 ;; pointer $poly: 80 bytes (polyobject)
 ;; input value $leftover
 ;; output pointer $mac: 16 bytes
-(func $poly1305_finish (export "poly1305_finish") trusted
+(func $poly1305_finish (export "poly1305_finish")
 	(param $poly i32)
 	(param $leftover i32)
 	(param $mac i32)
@@ -40,9 +40,8 @@
 				)
 			)
 
-			(s32.store offset=60 (get_local $poly) (s32.const 1))
-			
 			(get_local $poly)
+			(i32.const 1) ;; $final = 1
 			(i32.add (get_local $poly) (i32.const 64))
 			(i32.const 16)
 			(call $poly1305_blocks) ;; poly1305_blocks

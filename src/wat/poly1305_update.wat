@@ -13,7 +13,7 @@
 ;; input pointer $m: $bytes bytes
 ;; input value $bytes
 ;; result value: new leftover
-(func $poly1305_update (export "poly1305_update") trusted
+(func $poly1305_update (export "poly1305_update")
 	(param $poly i32)
 	(param $leftover i32)
 	(param $m i32)
@@ -62,6 +62,7 @@
 			)
 
 			(get_local $poly)
+			(i32.const 0) ;; $final = 0
 			(i32.add (get_local $poly) (i32.const 64))
 			(i32.const 16)
 			(call $poly1305_blocks) ;; poly1305_blocks
@@ -75,6 +76,7 @@
 			(set_local $want (i32.and (get_local $bytes) (i32.const 0xfffffff0)))
 			
 			(get_local $poly)
+			(i32.const 0) ;; $final = 0
 			(get_local $m)
 			(get_local $want)
 			(call $poly1305_blocks) ;; poly1305_blocks

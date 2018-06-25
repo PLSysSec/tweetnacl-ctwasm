@@ -9,10 +9,12 @@
 ;;  buffer: 64..79
 
 ;; pointer $poly: 80 bytes (polyobject)
+;; input value $final
 ;; input pointer $m: $bytes bytes
 ;; input value $bytes
-(func $poly1305_blocks (export "poly1305_blocks") trusted
+(func $poly1305_blocks (export "poly1305_blocks")
 	(param $poly i32)
+	(param $final i32)
 	(param $m i32)
 	(param $bytes i32)
 
@@ -23,7 +25,7 @@
 	(local $d0 s64) (local $d1 s64) (local $d2 s64) (local $d3 s64) (local $d4 s64)
 	(local $c s32)
 	
-	(if (i32.eq (i32.declassify (s32.load offset=60 (get_local $poly))) (i32.const 0))
+	(if (i32.eq (get_local $final) (i32.const 0))
 		(then
 			(set_local $hibit (s32.const 16777216))
 		)
