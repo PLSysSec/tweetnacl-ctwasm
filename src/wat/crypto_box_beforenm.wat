@@ -4,7 +4,7 @@
 ;; input pointer $y: 32 bytes
 ;; input pointer $x: 32 bytes
 ;; alloc pointer $alloc: 928 + 32 = 960 bytes
-(func $crypto_box_beforenm (export "crypto_box_beforenm") 
+(func $crypto_box_beforenm (export "crypto_box_beforenm") untrusted 
 	(param $k i32)
 	(param $y i32)
 	(param $x i32)

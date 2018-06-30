@@ -2,7 +2,7 @@
 
 ;; output pointer $r: 32 bytes
 ;; input/output pointer $x: 64 i64 = 512 bytes
-(func $modL (export "modL")
+(func $modL (export "modL") untrusted
 	(param $r i32)
 	(param $x i32)
 

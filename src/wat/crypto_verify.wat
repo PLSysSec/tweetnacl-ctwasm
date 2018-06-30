@@ -4,7 +4,7 @@
 ;; input pointer $y: $n bytes
 ;; input value $n
 ;; return bool
-(func $vn (export "vn")
+(func $vn (export "vn") untrusted
 	(param $x i32)
 	(param $y i32)
 	(param $n i32)
@@ -53,7 +53,7 @@
 ;; input pointer $x: 16 bytes
 ;; input pointer $y: 16 bytes
 ;; return bool
-(func $crypto_verify_16 (export "crypto_verify_16")
+(func $crypto_verify_16 (export "crypto_verify_16") untrusted
 	(param $x i32)
 	(param $y i32)
 	(result s32)
@@ -77,7 +77,7 @@
 ;; input pointer $x: 32 bytes
 ;; input pointer $y: 32 bytes
 ;; return bool
-(func $crypto_verify_32 (export "crypto_verify_32")
+(func $crypto_verify_32 (export "crypto_verify_32") untrusted
 	(param $x i32)
 	(param $y i32)
 	(result s32)

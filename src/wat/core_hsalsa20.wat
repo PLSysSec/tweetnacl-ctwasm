@@ -4,7 +4,7 @@
 ;; input pointer $p: 16 bytes
 ;; input pointer $k: 32 bytes
 ;; input pointer $c: 16 bytes
-(func $core_hsalsa20 (export "core_hsalsa20") (param $o i32) (param $p i32) (param $k i32) (param $c i32)
+(func $core_hsalsa20 (export "core_hsalsa20") untrusted (param $o i32) (param $p i32) (param $k i32) (param $c i32)
 	(local $j0 s32) (local $j1 s32) (local $j2 s32) (local $j3 s32)
 	(local $j4 s32) (local $j5 s32) (local $j6 s32) (local $j7 s32)
 	(local $j8 s32) (local $j9 s32) (local $j10 s32) (local $j11 s32)

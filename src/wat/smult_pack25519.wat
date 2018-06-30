@@ -3,7 +3,7 @@
 ;; output pointer $o: 32 bytes
 ;; input pointer $n: 16 i64 = 128 bytes
 ;; alloc pointer $alloc: 256 bytes
-(func $pack25519 (export "pack25519")
+(func $pack25519 (export "pack25519") untrusted
 	(param $o i32)
 	(param $n i32)
 	(param $alloc i32)

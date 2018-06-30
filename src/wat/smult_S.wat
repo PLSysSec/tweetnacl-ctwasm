@@ -2,7 +2,7 @@
 
 ;; output pointer $o: 16 i64 = 128 bytes
 ;; input pointer $a: 16 i64 = 128 bytes
-(func $S (export "S")
+(func $S (export "S") untrusted
 	(param $o i32)
 	(param $a i32)
 

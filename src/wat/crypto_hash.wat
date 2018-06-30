@@ -4,7 +4,7 @@
 ;; input pointer $m: $n bytes
 ;; input value $n
 ;; alloc pointer $alloc: 128 + 256 = 384 bytes
-(func $crypto_hash (export "crypto_hash")
+(func $crypto_hash (export "crypto_hash") untrusted
 	(param $out i32)
 	(param $m i32)
 	(param $n i32)

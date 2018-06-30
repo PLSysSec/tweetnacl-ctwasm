@@ -3,7 +3,7 @@
 ;; input pointer $a: 16 i64 = 128 bytes
 ;; alloc pointer $alloc: 256 + 128 = 384 bytes
 ;; return value: 1 or 0
-(func $par25519 (export "par25519")
+(func $par25519 (export "par25519") untrusted
 	(param $a i32)
 	(param $alloc i32)
 	(result s32)

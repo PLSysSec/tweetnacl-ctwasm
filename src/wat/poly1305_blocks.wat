@@ -12,7 +12,7 @@
 ;; input value $final
 ;; input pointer $m: $bytes bytes
 ;; input value $bytes
-(func $poly1305_blocks (export "poly1305_blocks")
+(func $poly1305_blocks (export "poly1305_blocks") untrusted
 	(param $poly i32)
 	(param $final i32)
 	(param $m i32)

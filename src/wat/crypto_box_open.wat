@@ -8,7 +8,7 @@
 ;; input pointer $x: 32 bytes
 ;; alloc pointer $alloc: 960 + 32 = 992 bytes
 ;; return: 0 okay, -1 problem
-(func $crypto_box_open (export "crypto_box_open") trusted
+(func $crypto_box_open (export "crypto_box_open") 
 	(param $m i32)
 	(param $c i32)
 	(param $d i32)

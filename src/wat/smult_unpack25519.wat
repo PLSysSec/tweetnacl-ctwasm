@@ -2,7 +2,7 @@
 
 ;; output pointer $o: 16 i64 = 128 bytes
 ;; input pointer $n: 32 bytes
-(func $unpack25519 (export "unpack25519")
+(func $unpack25519 (export "unpack25519") untrusted
 	(param $o i32)
 	(param $n i32)
 

@@ -4,7 +4,7 @@
 ;; input pointer $m: $n bytes
 ;; input value $n
 ;; alloc pointer $alloc: 128 bytes
-(func $crypto_hashblocks (export "crypto_hashblocks")
+(func $crypto_hashblocks (export "crypto_hashblocks") untrusted
 	(param $h i32)
 	(param $m i32)
 	(param $n i32)

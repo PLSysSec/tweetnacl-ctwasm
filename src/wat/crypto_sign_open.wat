@@ -6,7 +6,7 @@
 ;; input $pk: 32 bytes
 ;; alloc pointer $alloc: 896 + 32 + 64 + 2 * 512 = 2016 bytes
 ;; return: -1 if error; $m - 64 otherwise
-(func $crypto_sign_open (export "crypto_sign_open") trusted
+(func $crypto_sign_open (export "crypto_sign_open") 
 	(param $m i32)
 	(param $sm i32)
 	(param $n i32)

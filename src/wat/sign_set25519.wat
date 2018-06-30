@@ -2,7 +2,7 @@
 
 ;; output pointer $r: 16 i64 = 128 bytes
 ;; input pointer $a: 16 i64 = 128 bytes
-(func $set25519 (export "set25519")
+(func $set25519 (export "set25519") untrusted
 	(param $r i32)
 	(param $a i32)
 

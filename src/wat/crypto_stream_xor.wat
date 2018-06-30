@@ -6,7 +6,7 @@
 ;; input pointer $n: 24 bytes
 ;; input pointer $k: 32 bytes
 ;; alloc pointer $alloc: 120 bytes
-(func $crypto_stream_xor (export "crypto_stream_xor") 
+(func $crypto_stream_xor (export "crypto_stream_xor") untrusted 
 	(param $c i32)
 	(param $m i32)
 	(param $d i32)

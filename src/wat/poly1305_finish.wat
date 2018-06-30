@@ -11,7 +11,7 @@
 ;; pointer $poly: 80 bytes (polyobject)
 ;; input value $leftover
 ;; output pointer $mac: 16 bytes
-(func $poly1305_finish (export "poly1305_finish")
+(func $poly1305_finish (export "poly1305_finish") untrusted
 	(param $poly i32)
 	(param $leftover i32)
 	(param $mac i32)

@@ -3,7 +3,7 @@
 ;; input/output pointer $p: 4 * (16 i64) = 512 bytes
 ;; input/output pointer $q: 4 * (16 i64) = 512 bytes
 ;; input value $b (is 1 or 0)
-(func $cswap (export "cswap")
+(func $cswap (export "cswap") untrusted
 	(param $p i32)
 	(param $q i32)
 	(param $b s32)

@@ -3,7 +3,7 @@
 ;; output pointer $o: 16 i64 = 128 bytes
 ;; input pointer $i: 16 i64 = 128 bytes
 ;; alloc pointer $alloc: 16 i64 = 128 bytes
-(func $pow2523 (export "pow2523")
+(func $pow2523 (export "pow2523") untrusted
 	(param $o i32)
 	(param $i i32)
 	(param $alloc i32)

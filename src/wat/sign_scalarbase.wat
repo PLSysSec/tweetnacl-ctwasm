@@ -3,7 +3,7 @@
 ;; output pointer $p: 4 * (16 i64) = 512 bytes
 ;; input pointer $s: 64 bytes
 ;; alloc pointer $alloc: 512 + 384 = 896 bytes
-(func $scalarbase (export "scalarbase")
+(func $scalarbase (export "scalarbase") untrusted
 	(param $p i32)
 	(param $s i32)
 	(param $alloc i32)

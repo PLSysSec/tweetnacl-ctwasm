@@ -3,7 +3,7 @@
 ;; input/output pointer $p: 4 * (16 i64) = 512 bytes
 ;; input pointer $q: 4 * (16 i64) = 512 bytes
 ;; alloc pointer $alloc: 384 bytes
-(func $add (export "add")
+(func $add (export "add") untrusted
 	(param $p i32)
 	(param $q i32)
 	(param $alloc i32)

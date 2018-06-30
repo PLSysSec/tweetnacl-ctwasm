@@ -7,7 +7,7 @@
 ;; input pointer $k: 32 bytes
 ;; alloc pointer $alloc: 120 bytes
 ;; return: 0 okay, -1 if $d < 32
-(func $crypto_secretbox (export "crypto_secretbox")
+(func $crypto_secretbox (export "crypto_secretbox") untrusted
 	(param $c i32)
 	(param $m i32)
 	(param $d i32)

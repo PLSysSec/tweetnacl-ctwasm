@@ -2,7 +2,7 @@
 
 ;; input/output pointer $r: 64 bytes
 ;; alloc pointer $alloc: 64 i64 = 512 bytes
-(func $reduce (export "reduce")
+(func $reduce (export "reduce") untrusted
 	(param $r i32)
 	(param $alloc i32)
 

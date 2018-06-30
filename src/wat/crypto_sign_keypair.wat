@@ -3,7 +3,7 @@
 ;; output pointer $pk: 32 bytes
 ;; input/output pointer $sk: 64 bytes (first 32 bytes input; last 32 bytes output)
 ;; alloc pointer $alloc: 896 + 64 + 512 = 1472 bytes
-(func $crypto_sign_keypair (export "crypto_sign_keypair")
+(func $crypto_sign_keypair (export "crypto_sign_keypair") untrusted
 	(param $pk i32)
 	(param $sk i32)
 	(param $alloc i32)

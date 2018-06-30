@@ -10,7 +10,7 @@
 
 ;; output pointer $polyobject: 80 bytes
 ;; input pointer $k: 32 bytes
-(func $poly1305_init (export "poly1305_init")
+(func $poly1305_init (export "poly1305_init") untrusted
 	(param $polyobject i32)
 	(param $k i32)
 	

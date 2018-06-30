@@ -13,7 +13,7 @@
 ;; input pointer $m: $bytes bytes
 ;; input value $bytes
 ;; result value: new leftover
-(func $poly1305_update (export "poly1305_update")
+(func $poly1305_update (export "poly1305_update") untrusted
 	(param $poly i32)
 	(param $leftover i32)
 	(param $m i32)

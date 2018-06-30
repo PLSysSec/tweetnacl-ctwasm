@@ -7,7 +7,7 @@
 ;; input pointer $k: 32 bytes
 ;; alloc pointer $alloc: 152 bytes
 ;; return: 0 okay, -1 problem
-(func $crypto_secretbox_open (export "crypto_secretbox_open") trusted
+(func $crypto_secretbox_open (export "crypto_secretbox_open") 
 	(param $m i32)
 	(param $c i32)
 	(param $d i32)

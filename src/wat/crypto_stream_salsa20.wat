@@ -5,7 +5,7 @@
 ;; input pointer $n: 8 bytes
 ;; input pointer $k: 32 bytes
 ;; alloc pointer $alloc: 80 bytes
-(func $crypto_stream_salsa20 (export "crypto_stream_salsa20")
+(func $crypto_stream_salsa20 (export "crypto_stream_salsa20") untrusted
 	(param $c i32)
 	(param $b i32)
 	(param $n i32)

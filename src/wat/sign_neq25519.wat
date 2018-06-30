@@ -4,7 +4,7 @@
 ;; input pointer $b: 16 i64 = 128 bytes
 ;; alloc pointer $alloc: 64 + 256 = 384 bytes
 ;; return bool
-(func $neq25519 (export "neq25519")
+(func $neq25519 (export "neq25519") untrusted
 	(param $a i32)
 	(param $b i32)
 	(param $alloc i32)

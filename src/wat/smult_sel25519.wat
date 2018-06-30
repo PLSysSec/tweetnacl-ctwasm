@@ -3,7 +3,7 @@
 ;; input/output pointer $p: 16 i64 = 128 bytes
 ;; input/output pointer $q: 16 i64 = 128 bytes
 ;; input value $b (is 1 or 0)
-(func $sel25519 (export "sel25519")
+(func $sel25519 (export "sel25519") untrusted
 	(param $p i32)
 	(param $q i32)
 	(param $b s32)

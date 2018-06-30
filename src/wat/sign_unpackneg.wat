@@ -4,7 +4,7 @@
 ;; input pointer $p: 32 bytes
 ;; alloc pointer $alloc: 7 * 128 = 896 bytes
 ;; return bool
-(func $unpackneg (export "unpackneg") trusted
+(func $unpackneg (export "unpackneg") 
 	(param $r i32)
 	(param $p i32)
 	(param $alloc i32)

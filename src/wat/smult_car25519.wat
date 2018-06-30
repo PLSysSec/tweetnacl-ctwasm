@@ -1,7 +1,7 @@
 ;; Author: Torsten Stüber
 
 ;; input/output pointer $o: 16 i64 = 128 bytes
-(func $car25519 (export "car25519")
+(func $car25519 (export "car25519") untrusted
 	(param $o i32)
 
 	(local $v s64)

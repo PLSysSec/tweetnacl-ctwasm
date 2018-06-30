@@ -3,7 +3,7 @@
 ;; output pointer $q: 32 bytes
 ;; input pointer $n: 32 bytes
 ;; alloc pointer $alloc: 928 bytes
-(func $crypto_scalarmult_base (export "crypto_scalarmult_base")
+(func $crypto_scalarmult_base (export "crypto_scalarmult_base") untrusted
 	(param $q i32)
 	(param $n i32)
 	(param $alloc i32)
@@ -30,7 +30,7 @@
 ;;             544..671: $d
 ;;         672..799: $e, reused in pack25519 and inv25519
 ;;         800..927: $f, reused in pack25519
-(func $crypto_scalarmult (export "crypto_scalarmult")
+(func $crypto_scalarmult (export "crypto_scalarmult") untrusted
 	(param $q i32)
 	(param $n i32)
 	(param $p i32)

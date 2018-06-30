@@ -4,7 +4,7 @@
 ;; input/output pointer $q: 4 * (16 i64) = 512 bytes
 ;; input pointer $s: 64 bytes
 ;; alloc pointer $alloc: 384 bytes
-(func $scalarmult (export "scalarmult")
+(func $scalarmult (export "scalarmult") untrusted
 	(param $p i32)
 	(param $q i32)
 	(param $s i32)

@@ -3,7 +3,7 @@
 ;; output pointer $o: 16 i64 = 128 bytes
 ;; input pointer $i: 16 i64 = 128 bytes
 ;; alloc pointer $alloc: 128 bytes
-(func $inv25519 (export "inv25519")
+(func $inv25519 (export "inv25519") untrusted
 	(param $o i32)
 	(param $i i32)
 	(param $alloc i32)

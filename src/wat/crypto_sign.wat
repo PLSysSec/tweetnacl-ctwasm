@@ -4,7 +4,7 @@
 ;; input value $n
 ;; input $sk: 64 bytes
 ;; alloc pointer $alloc: 896 + 3 * 64 + 2 * 512 = 2112 bytes
-(func $crypto_sign (export "crypto_sign")
+(func $crypto_sign (export "crypto_sign") untrusted
 	(param $sm i32)
 	(param $n i32)
 	(param $sk i32)

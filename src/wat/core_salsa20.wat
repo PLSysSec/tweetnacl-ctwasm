@@ -4,7 +4,7 @@
 ;; input pointer $p: 16 bytes
 ;; input pointer $k: 32 bytes
 ;; input pointer $c: 16 bytes
-(func $core_salsa20 (export "core_salsa20")
+(func $core_salsa20 (export "core_salsa20") untrusted
 	(param $o i32)
 	(param $p i32)
 	(param $k i32)
