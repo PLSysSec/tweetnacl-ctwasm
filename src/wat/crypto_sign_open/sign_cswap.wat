@@ -6,7 +6,7 @@
 (func $cswap (export "cswap") untrusted
 	(param $p i32)
 	(param $q i32)
-	(param $b s32)
+	(param $b i32)
 
 	(get_local $p)
 	(get_local $q)

@@ -38,10 +38,10 @@
 		)
 	)
 
-	(s64.store offset=32 (get_local $m) (s64.load offset=0 (get_local $pk)))
-	(s64.store offset=40 (get_local $m) (s64.load offset=8 (get_local $pk)))
-	(s64.store offset=48 (get_local $m) (s64.load offset=16 (get_local $pk)))
-	(s64.store offset=56 (get_local $m) (s64.load offset=24 (get_local $pk)))
+	(i64.store offset=32 (get_local $m) (i64.load offset=0 (get_local $pk)))
+	(i64.store offset=40 (get_local $m) (i64.load offset=8 (get_local $pk)))
+	(i64.store offset=48 (get_local $m) (i64.load offset=16 (get_local $pk)))
+	(i64.store offset=56 (get_local $m) (i64.load offset=24 (get_local $pk)))
 
 	(get_local $h)
 	(get_local $m)
@@ -76,7 +76,7 @@
 
 	(set_local $n (i32.sub (get_local $n) (i32.const 64)))
 
-	(if (i32.declassify (call $crypto_verify_32 (get_local $sm) (get_local $t)))
+	(if (call $crypto_verify_32 (get_local $sm) (get_local $t))
 		(then
 			(i32.const -1)
 			(return)
