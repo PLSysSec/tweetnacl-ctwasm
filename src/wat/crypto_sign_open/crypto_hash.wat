@@ -1,0 +1,166 @@
+;; Author: Torsten Stüber
+
+;; output pointer $out: 64 bytes
+;; input pointer $m: $n bytes
+;; input value $n
+;; alloc pointer $alloc: 128 + 256 = 384 bytes
+(func $crypto_hash (export "crypto_hash") untrusted
+	(param $out i32)
+	(param $m i32)
+	(param $n i32)
+	(param $alloc i32)
+
+	(local $x i32)
+	(local $i i32)
+	(local $tmp i32)
+	(local $a s64)
+
+	(set_local $x (i32.add (i32.const 128) (get_local $alloc)))
+
+	(s64.store offset=0  (get_local $out) (s64.const 0x6a09e667f3bcc908))
+	(s64.store offset=8  (get_local $out) (s64.const 0xbb67ae8584caa73b))
+	(s64.store offset=16 (get_local $out) (s64.const 0x3c6ef372fe94f82b))
+	(s64.store offset=24 (get_local $out) (s64.const 0xa54ff53a5f1d36f1))
+	(s64.store offset=32 (get_local $out) (s64.const 0x510e527fade682d1))
+	(s64.store offset=40 (get_local $out) (s64.const 0x9b05688c2b3e6c1f))
+	(s64.store offset=48 (get_local $out) (s64.const 0x1f83d9abfb41bd6b))
+	(s64.store offset=56 (get_local $out) (s64.const 0x5be0cd19137e2179))
+
+	(get_local $out)
+	(get_local $m)
+	(get_local $n)
+	(get_local $alloc)
+	(call $crypto_hashblocks)
+
+	(get_local $n)
+		(set_local $m (i32.add (get_local $m) (get_local $n)))
+		(set_local $n (i32.and (get_local $n) (i32.const 127)))
+		(set_local $m (i32.sub (get_local $m) (get_local $n)))
+
+		(set_local $tmp (get_local $x))
+		(block
+			(loop
+				(br_if 1 (i32.eq (get_local $i) (get_local $n)))
+
+				(s32.store8 (get_local $tmp) (s32.load8_u (get_local $m)))
+
+				(set_local $i (i32.add (i32.const 1) (get_local $i)))
+				(set_local $tmp (i32.add (i32.const 1) (get_local $tmp)))
+				(set_local $m (i32.add (i32.const 1) (get_local $m)))
+				(br 0)
+			)
+		)
+	
+		(s32.store8 (get_local $tmp) (s32.const 128))
+		(set_local $i (i32.add (get_local $i) (i32.const 1)))
+		(block
+			(loop
+				(br_if 1 (i32.eq (get_local $i) (i32.const 256)))
+
+				(s32.store8 offset=1 (get_local $tmp) (s32.const 0))
+
+				(set_local $i (i32.add (i32.const 1) (get_local $i)))
+				(set_local $tmp (i32.add (i32.const 1) (get_local $tmp)))
+				(br 0)
+			)
+		)
+	(set_local $tmp)
+
+	(set_local $n (select (i32.const 128) (i32.const 256) (i32.lt_u (get_local $n) (i32.const 112))))
+
+	(get_local $out)
+	(get_local $x)
+	(get_local $n)
+	(get_local $alloc)
+		(set_local $x (i32.sub (i32.add (get_local $x) (get_local $n)) (i32.const 9)))
+		(s32.store8 (get_local $x) (s32.const 0))
+		(s32.store8 offset=1 (get_local $x) (s32.const 0))
+		(s32.store8 offset=2 (get_local $x) (s32.const 0))
+		(s32.store8 offset=3 (get_local $x) (s32.const 0))
+		(s32.store8 offset=4 (get_local $x) (s32.shr_u (s32.classify (get_local $tmp)) (s32.const 29)))
+		(s32.store8 offset=5 (get_local $x) (s32.shr_u (s32.classify (get_local $tmp)) (s32.const 21)))
+		(s32.store8 offset=6 (get_local $x) (s32.shr_u (s32.classify (get_local $tmp)) (s32.const 13)))
+		(s32.store8 offset=7 (get_local $x) (s32.shr_u (s32.classify (get_local $tmp)) (s32.const 5)))
+		(s32.store8 offset=8 (get_local $x) (s32.shl (s32.classify (get_local $tmp)) (s32.const 3)))
+	(call $crypto_hashblocks)
+
+	(set_local $a (s64.load offset=0 (get_local $out)))
+	(s64.store8 offset=0 (get_local $out) (s64.shr_u (get_local $a) (s64.const 56)))
+	(s64.store8 offset=1 (get_local $out) (s64.shr_u (get_local $a) (s64.const 48)))
+	(s64.store8 offset=2 (get_local $out) (s64.shr_u (get_local $a) (s64.const 40)))
+	(s64.store8 offset=3 (get_local $out) (s64.shr_u (get_local $a) (s64.const 32)))
+	(s64.store8 offset=4 (get_local $out) (s64.shr_u (get_local $a) (s64.const 24)))
+	(s64.store8 offset=5 (get_local $out) (s64.shr_u (get_local $a) (s64.const 16)))
+	(s64.store8 offset=6 (get_local $out) (s64.shr_u (get_local $a) (s64.const 8)))
+	(s64.store8 offset=7 (get_local $out) (get_local $a))
+
+	(set_local $a (s64.load offset=8 (get_local $out)))
+	(s64.store8 offset=8 (get_local $out) (s64.shr_u (get_local $a) (s64.const 56)))
+	(s64.store8 offset=9 (get_local $out) (s64.shr_u (get_local $a) (s64.const 48)))
+	(s64.store8 offset=10 (get_local $out) (s64.shr_u (get_local $a) (s64.const 40)))
+	(s64.store8 offset=11 (get_local $out) (s64.shr_u (get_local $a) (s64.const 32)))
+	(s64.store8 offset=12 (get_local $out) (s64.shr_u (get_local $a) (s64.const 24)))
+	(s64.store8 offset=13 (get_local $out) (s64.shr_u (get_local $a) (s64.const 16)))
+	(s64.store8 offset=14 (get_local $out) (s64.shr_u (get_local $a) (s64.const 8)))
+	(s64.store8 offset=15 (get_local $out) (get_local $a))
+
+	(set_local $a (s64.load offset=16 (get_local $out)))
+	(s64.store8 offset=16 (get_local $out) (s64.shr_u (get_local $a) (s64.const 56)))
+	(s64.store8 offset=17 (get_local $out) (s64.shr_u (get_local $a) (s64.const 48)))
+	(s64.store8 offset=18 (get_local $out) (s64.shr_u (get_local $a) (s64.const 40)))
+	(s64.store8 offset=19 (get_local $out) (s64.shr_u (get_local $a) (s64.const 32)))
+	(s64.store8 offset=20 (get_local $out) (s64.shr_u (get_local $a) (s64.const 24)))
+	(s64.store8 offset=21 (get_local $out) (s64.shr_u (get_local $a) (s64.const 16)))
+	(s64.store8 offset=22 (get_local $out) (s64.shr_u (get_local $a) (s64.const 8)))
+	(s64.store8 offset=23 (get_local $out) (get_local $a))
+
+	(set_local $a (s64.load offset=24 (get_local $out)))
+	(s64.store8 offset=24 (get_local $out) (s64.shr_u (get_local $a) (s64.const 56)))
+	(s64.store8 offset=25 (get_local $out) (s64.shr_u (get_local $a) (s64.const 48)))
+	(s64.store8 offset=26 (get_local $out) (s64.shr_u (get_local $a) (s64.const 40)))
+	(s64.store8 offset=27 (get_local $out) (s64.shr_u (get_local $a) (s64.const 32)))
+	(s64.store8 offset=28 (get_local $out) (s64.shr_u (get_local $a) (s64.const 24)))
+	(s64.store8 offset=29 (get_local $out) (s64.shr_u (get_local $a) (s64.const 16)))
+	(s64.store8 offset=30 (get_local $out) (s64.shr_u (get_local $a) (s64.const 8)))
+	(s64.store8 offset=31 (get_local $out) (get_local $a))
+
+	(set_local $a (s64.load offset=32 (get_local $out)))
+	(s64.store8 offset=32 (get_local $out) (s64.shr_u (get_local $a) (s64.const 56)))
+	(s64.store8 offset=33 (get_local $out) (s64.shr_u (get_local $a) (s64.const 48)))
+	(s64.store8 offset=34 (get_local $out) (s64.shr_u (get_local $a) (s64.const 40)))
+	(s64.store8 offset=35 (get_local $out) (s64.shr_u (get_local $a) (s64.const 32)))
+	(s64.store8 offset=36 (get_local $out) (s64.shr_u (get_local $a) (s64.const 24)))
+	(s64.store8 offset=37 (get_local $out) (s64.shr_u (get_local $a) (s64.const 16)))
+	(s64.store8 offset=38 (get_local $out) (s64.shr_u (get_local $a) (s64.const 8)))
+	(s64.store8 offset=39 (get_local $out) (get_local $a))
+
+	(set_local $a (s64.load offset=40 (get_local $out)))
+	(s64.store8 offset=40 (get_local $out) (s64.shr_u (get_local $a) (s64.const 56)))
+	(s64.store8 offset=41 (get_local $out) (s64.shr_u (get_local $a) (s64.const 48)))
+	(s64.store8 offset=42 (get_local $out) (s64.shr_u (get_local $a) (s64.const 40)))
+	(s64.store8 offset=43 (get_local $out) (s64.shr_u (get_local $a) (s64.const 32)))
+	(s64.store8 offset=44 (get_local $out) (s64.shr_u (get_local $a) (s64.const 24)))
+	(s64.store8 offset=45 (get_local $out) (s64.shr_u (get_local $a) (s64.const 16)))
+	(s64.store8 offset=46 (get_local $out) (s64.shr_u (get_local $a) (s64.const 8)))
+	(s64.store8 offset=47 (get_local $out) (get_local $a))
+
+	(set_local $a (s64.load offset=48 (get_local $out)))
+	(s64.store8 offset=48 (get_local $out) (s64.shr_u (get_local $a) (s64.const 56)))
+	(s64.store8 offset=49 (get_local $out) (s64.shr_u (get_local $a) (s64.const 48)))
+	(s64.store8 offset=50 (get_local $out) (s64.shr_u (get_local $a) (s64.const 40)))
+	(s64.store8 offset=51 (get_local $out) (s64.shr_u (get_local $a) (s64.const 32)))
+	(s64.store8 offset=52 (get_local $out) (s64.shr_u (get_local $a) (s64.const 24)))
+	(s64.store8 offset=53 (get_local $out) (s64.shr_u (get_local $a) (s64.const 16)))
+	(s64.store8 offset=54 (get_local $out) (s64.shr_u (get_local $a) (s64.const 8)))
+	(s64.store8 offset=55 (get_local $out) (get_local $a))
+
+	(set_local $a (s64.load offset=56 (get_local $out)))
+	(s64.store8 offset=56 (get_local $out) (s64.shr_u (get_local $a) (s64.const 56)))
+	(s64.store8 offset=57 (get_local $out) (s64.shr_u (get_local $a) (s64.const 48)))
+	(s64.store8 offset=58 (get_local $out) (s64.shr_u (get_local $a) (s64.const 40)))
+	(s64.store8 offset=59 (get_local $out) (s64.shr_u (get_local $a) (s64.const 32)))
+	(s64.store8 offset=60 (get_local $out) (s64.shr_u (get_local $a) (s64.const 24)))
+	(s64.store8 offset=61 (get_local $out) (s64.shr_u (get_local $a) (s64.const 16)))
+	(s64.store8 offset=62 (get_local $out) (s64.shr_u (get_local $a) (s64.const 8)))
+	(s64.store8 offset=63 (get_local $out) (get_local $a))
+)
