@@ -1,10 +1,10 @@
-This repository is a fork of [TweetNacl in Webassembly](https://github.com/TorstenStueber/TweetNacl-WebAssembly) annotated with CT-Wasm labels to ensure constant-time.
+# TweetNacl in CT-Wasm
 
-# TweetNacl in WebAssembly
+This repository is a fork of [TweetNacl in WebAssembly](https://github.com/TorstenStueber/TweetNacl-WebAssembly) annotated with CT-Wasm labels to ensure constant-time.
 
 Work in Progress
 
-This is a handwritten port of the crypto library TweetNacl to WebAssembly. This is the fastest library for end-to-end encryption running in the browser. It provides state of the art strong cryptography.
+This is a semi-handwritten port of the crypto library TweetNacl to CT-Wasm. This is the fastest library for end-to-end encryption running in the browser. It provides state of the art strong cryptography.
 
 It provides the following features:
 
@@ -17,8 +17,15 @@ It provides the following features:
 - Hashing
 	- implements SHA512
 
-The WebAssembly source code is to be found in the directory `src/wat/*`.
+The CT-Wasm source code can be found in the `src/wat/*` directory. 
 
-- edit the Web Assembly code in `src/wat/*`
-- run `npm run build` to build the JavaScript file `dist/wasmCode.js`
-- open `index.html` in the browser in order to run `dist/wasmCode.js`
+### Build
+
+Run `npm run build` to build the JavaScript file `dist/wasmCode.js`. You can 
+also find a pre-built version of the library in our [pre-built release](https://github.com/PLSysSec/ct-wasm-spec/releases) 
+under `tweetnacl-ctwasm.zip`. 
+
+### Run
+
+Open `index.html` with Chromium to run `dist/wasmCode.js`. Then open up the console 
+to see the benchmark numbers. 
