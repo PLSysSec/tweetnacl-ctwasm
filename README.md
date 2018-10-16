@@ -1,3 +1,5 @@
+This repository is a fork of [TweetNacl in Webassembly](https://github.com/TorstenStueber/TweetNacl-WebAssembly) annotated with CT-Wasm labels to ensure constant-time.
+
 # TweetNacl in WebAssembly
 
 Work in Progress
