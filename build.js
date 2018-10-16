@@ -24,6 +24,11 @@ const {exec} = require('child_process');
 const wat = path.join(wasmOutputDirectory, 'build.wat');
 const wasm = path.join(wasmOutputDirectory, 'build.wasm');
 
+if (process.argv.length != 3) {
+	console.log("Usage: " + __filename + " <path/to/ct_wasm_spec>");
+	process.exit(-1);
+}
+
 function wast2wasm(m, _) {
 	fs.writeFileSync(wat, m);
 	return promisify(exec)(`${process.argv[2]} -d -i ${wat} -o ${wasm}`,{});
