@@ -25,12 +25,13 @@ npm run build -- path/to/ct_wasm_spec
 ```
 to build the JavaScript file `dist/wasmCode.js`.
 The `ct_wasm_spec` tool can be found in our
-[pre-built releases](https://github.com/PLSysSec/ct-wasm-spec/releases)
+[pre-built releases](https://github.com/PLSysSec/ct-wasm-spec/releases/tag/artifact)
 under `*_binaries.zip`. 
 A pre-built version of the library 
 can be found there as well under `tweetnacl-ctwasm.zip`.
 
 ### Run
 
-Open `index.html` with Chromium to run `dist/wasmCode.js`. Then open up the console 
+Open `index.html` with the modified Chromium binary found in our [releases page](https://github.com/PLSysSec/ct-wasm-spec/releases/tag/artifact)
+to run `dist/wasmCode.js`. Then open up the console 
 to see the benchmark numbers. 
