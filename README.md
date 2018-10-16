@@ -21,9 +21,13 @@ The CT-Wasm source code can be found in the `src/wat/*` directory.
 
 ### Build
 
-Run `npm run build` to build the JavaScript file `dist/wasmCode.js`. You can 
-also find a pre-built version of the library in our [pre-built release](https://github.com/PLSysSec/ct-wasm-spec/releases) 
-under `tweetnacl-ctwasm.zip`. 
+Run
+```bash
+npm run build -- path/to/ct_wasm_spec
+```
+to build the JavaScript file `dist/wasmCode.js`. A pre-built version of the library 
+can be found in our [pre-built release](https://github.com/PLSysSec/ct-wasm-spec/releases) 
+under `tweetnacl-ctwasm.zip`, and the interpreter binary under `*_binaries.zip`. 
 
 ### Run
 
