@@ -2,8 +2,6 @@
 
 This repository is a fork of [TweetNacl in WebAssembly](https://github.com/TorstenStueber/TweetNacl-WebAssembly) annotated with CT-Wasm labels to ensure constant-time.
 
-Work in Progress
-
 This is a semi-handwritten port of the crypto library TweetNacl to CT-Wasm. This is the fastest library for end-to-end encryption running in the browser. It provides state of the art strong cryptography.
 
 It provides the following features:
