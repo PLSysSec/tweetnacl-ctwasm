@@ -27,10 +27,10 @@ npm run build -- path/to/ct_wasm_spec
 ```
 to build the JavaScript file `dist/wasmCode.js`.
 The `ct_wasm_spec` tool can be found in our
-[pre-built release](https://github.com/PLSysSec/ct-wasm-spec/releases)
+[pre-built releases](https://github.com/PLSysSec/ct-wasm-spec/releases)
 under `*_binaries.zip`. 
 A pre-built version of the library 
-can be found there under `tweetnacl-ctwasm.zip`.
+can be found there as well under `tweetnacl-ctwasm.zip`.
 
 ### Run
 
